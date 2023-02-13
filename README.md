@@ -51,3 +51,6 @@ if (actualFullName !== expectedFullName) {
     )
 }
 ```
+
+https://www.youtube.com/watch?v=NEEtzkLn2Gc&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=6
+
