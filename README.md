@@ -1,6 +1,31 @@
 # React-Testing-Tutorials
 https://www.youtube.com/playlist?list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd
 
+[JEST vs RTL](#jest-vs-rtl)
+
+[Types of Test](#types-of-test)
+
+[What is Automated Test ?](#what-is-automated-test)
+
+[Create a React Project With Typescript](#create-a-react-project-with-typescript)
+
+[Running Tests](#running-tests)
+
+[Anatomy of a test](#anatomy-of-a-test)
+
+[Writing First Test](#writing-first-test)
+
+[Test Driven Development](#test-driven-development)
+
+[Testing react props](#testing-react-props)
+
+[Jest Watch Mode](#jest-watch-mode)
+
+[Filtering Tests](#filtering-tests)
+
+[Grouping the tests](#grouping-the-tests)
+
+
 ## JEST vs RTL
 
 - **Jest** is a javascript testing framework.
@@ -138,8 +163,81 @@ test('greet renders correctly', ()=>{
 
 - Also called *red-green testing* as all test go from a *red failed state* to a *green passed state*.
 
-<!-- time: 1: 30 -->
-https://www.youtube.com/watch?v=foiMMI-pEes&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=9
+
+## Testing react props
+
+**greet.tsx**
+
+```tsx
+type GreetProps= {
+  name: string
+}
+
+export const Greet = (props: GreetProps) => {
+  return (
+    <div>
+        Hello {props.name}
+    </div>
+  )
+}
+```
+
+**greet.test.tsx**
+
+```tsx
+test('greet renders with a name', () => { 
+    render(<Greet name={'jissmon'}/>)
+    const textElement = screen.getByText('hello vishwas')
+    expect(textElement).toBeInTheDocument()
+ })
+```
+
+## Jest Watch Mode
+
+- Watch mode is an option we can pass to jest asking to watch files that have changed since the last commit and execute test related only to those changed files.
+
+
+## Filtering Tests
+
+**test.only()** - run only this test
+**test.skip()** - run other test but skip the test where skip method is called.
+
+## Grouping the tests
+
+We can wrap multiple tests in a `describe` block.
+
+### describe function
+
+*describe(name, function)*
+
+- 1st argument is the group name.
+- 2nd argument is a function that contains the expectations to test.
+
+- We pass both tests into `describe` block.
+
+```tsx
+import {render, screen} from '@testing-library/react';
+import { Greet } from './greet';
+
+describe('first', () => {         
+    test('greet renders correctly', ()=>{
+        render(<Greet name='justin'/>);
+        const textElement = screen.getByText('Hello justin');
+        expect(textElement).toBeInTheDocument();
+    });
+
+    test('greet renders with a name', () => { 
+        render(<Greet name='jissmon'/>)
+        const textElement = screen.getByText('Hello jissmon')
+        expect(textElement).toBeInTheDocument()
+    });
+});
+```
+
+**Note:** A test suite is a test file.
+
+## Filename Conventions
+
 
 
 
