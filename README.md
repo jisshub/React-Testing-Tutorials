@@ -52,5 +52,97 @@ if (actualFullName !== expectedFullName) {
 }
 ```
 
+## Create a React Project With Typescript
+
+```bash
+npx create-react-app my-app --template typescript
+```
+
+## Running Tests
+
+```tsx
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+```
+- Here no need to import `test` and `expect` method since it is glabally provided by create-react-app.
+
+
+```bash
+npm test
+```
+
+## Anatomy of a test
+
+- test() function takes 3 arguments.
+- test(name, function, timeout)
+- 1st argument is the test name used to identify the test.
+- 2nd argument is a function that contains the expectations to test.
+- 3rd argument is timeout which is an optional argument that specify how long to wait before aborting the test. Default timeout value is 5 seconds.
+
+
+## Writing First Test
+
+- Create a component called greet.
+- Create a test file for the same.
+- Add test name as 1st argument.
+- Create an arrow function as 2nd argument.
+- In arrow function, Create a virtual dom of the greet component against which we test our assertions.
+- To create a virtual dom of the component, we use
+*render()* method.
+- Call render from `@testing-library/react`.
+- Inject `Greet` component into `render` method.
+- Next check text 'Hello' is present in Greet component.
+- Pass text to expect method and check it is present in document.
+- finally run the test.
+
+**greet.test.tsx**
+
+```tsx
+import {render, screen} from '@testing-library/react';
+import { Greet } from './greet';
+
+test('greet renders correctly', ()=>{
+    render(<Greet />);
+    const textElement = screen.getByText('Hello');
+    expect(textElement).toBeInTheDocument();
+});
+```
+
+
+### Ignoring case using regex
+
+- Here we case of text by using regex. And we ignore the case while testing.
+
+```tsx
+test('greet renders correctly', ()=>{
+    render(<Greet />);
+    const textElement = screen.getByText(/hello/i);
+    expect(textElement).toBeInTheDocument();
+});
+```
+
+## Test Driven Development
+
+- TDD is a software development process where you write test before writing software code.
+- Once the test is written, then write the code to ensure the test pass.
+
+    1. Create tests that verify the functionality of a specific feature.
+    2. Write software code that will run the tests sucessfully when re-executed.
+    3. Refactor the code for optimization while ensuring the tests continue to pass.
+
+- Also called *red-green testing* as all test go from a *red failed state* to a *green passed state*.
+
+<!-- time: 1: 30 -->
+https://www.youtube.com/watch?v=foiMMI-pEes&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=9
+
+
+
+
 https://www.youtube.com/watch?v=NEEtzkLn2Gc&list=PLC3y8-rFHvwirqe1KHFCHJ0RqNuN61SJd&index=6
 
